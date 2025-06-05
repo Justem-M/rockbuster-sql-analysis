@@ -34,5 +34,5 @@ The project aimed to:
 
 ## 📈 Tableau Visualisation
 
-View the dashboard here: [Rockbuster Stealth Tableau Dashboard]([https://your-tableau-link.com](https://public.tableau.com/app/profile/justem.maciejek/viz/Rockbuster_geo_distribution_customers_a_revenue/Sheet1
-))  
+View the dashboard here: [Rockbuster Stealth Tableau Dashboard](https://public.tableau.com/app/profile/justem.maciejek/viz/Rockbuster_geo_distribution_customers_a_revenue/Sheet1
+)
