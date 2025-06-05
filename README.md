@@ -46,3 +46,8 @@ PostgreSQL (for database setup and querying)
 SQL (for data extraction and analysis) 
 
 Excel (for visualisation and final presentation of insights) 
+
+
+Tableau visualisation of Rockbuster geo distribution customers and revenue
+
+https://public.tableau.com/app/profile/justem.maciejek/viz/Rockbuster_geo_distribution_customers_a_revenue/Sheet1
