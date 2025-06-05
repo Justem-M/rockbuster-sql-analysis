@@ -1,0 +1,139 @@
+Check for and clean dirty data for film and customer table
+
+Duplicates
+FILM TABLE
+-- Shows only those records that are duplicate
+
+SELECT *, COUNT(*)
+FROM film
+GROUP BY	film_id, 
+		title, 
+          		description, 
+          		release_year, 
+   		language_id, 
+    		rental_duration, 
+            rental_rate, 
+     		 length,
+       		 replacement_cost, 
+ rating,
+          		last_update,
+        		special_features,
+        		fulltext
+HAVING COUNT(*) > 1; --no results set means we have no duplicates
+
+No duplicates were found
+
+
+CUSTOMER TABLE
+-- Shows only those records that are duplicate
+
+SELECT *, COUNT(*)
+FROM customer
+GROUP BY	customer_id,
+store_id,
+first_name,
+last_name,
+email,
+address_id,
+activebool,
+create_date,
+last_update,
+active
+HAVING COUNT(*) > 1; --no results set means we have no duplicates
+
+No duplicates were found
+
+
+Non-Uniform Data
+FILM TABLE
+SELECT rating, COUNT(*) AS count_of_movies
+FROM film
+GROUP BY rating
+ORDER BY count_of_movies ASC; -- Sort to see the rating categories
+
+No non-uniform data was found
+
+CUSTOMER TABLE
+SELECT active, COUNT(*) AS count_of_customers
+FROM customer
+GROUP BY active
+ORDER BY count_of_customers ASC; -- Sort to see the active status categories
+
+
+Missing Data
+FILM TABLE
+SELECT *
+FROM film
+WHERE title IS NULL OR description IS NULL OR length IS NULL;
+
+No missing data was found
+
+CUSTOMER TABLE
+SELECT *
+FROM customer
+WHERE first_name IS NULL OR last_name IS NULL OR email IS NULL;
+
+No missing data was found
+
+
+
+Summarissing data
+
+
+Film table
+		Numeric values:
+
+SELECT 
+    MIN(rental_duration) AS min_rental_duration,
+    MAX(rental_duration) AS max_rental_duration,
+    AVG(rental_duration) AS avg_rental_duration,
+    MIN(rental_rate) AS min_rental_rate,
+    MAX(rental_rate) AS max_rental_rate,
+    AVG(rental_rate) AS avg_rental_rate,
+    MIN(length) AS min_length,
+    MAX(length) AS max_length,
+    AVG(length) AS avg_length,
+    MIN(replacement_cost) AS min_replacement_cost,
+    MAX(replacement_cost) AS max_replacement_cost,
+    AVG(replacement_cost) AS avg_replacement_cost
+FROM film;
+
+		RENTAL DURATION
+Min_rental_duration = 3
+		Max_rental_duration = 7
+		Avg_rental_duration = 4.985
+
+		RENTAL RATE
+		Min_rental_rate = 0.99
+		Max_rental_rate = 4.99
+		Avg_renta_rate = 2.98
+
+		LENGTH
+		Min_length = 46
+		Max_length = 185
+		Avg_length = 115.272
+
+		REPLACEMENT COST
+		Min_replacement_cost = 9.99
+		Max_replacement_cost = 29.99
+		Avg_replacement_cost = 19.984
+
+
+		Non-numeric values:
+SELECT MODE() WITHIN GROUP (ORDER BY rating) AS mode_rating FROM film;
+
+Mode_rating = PG-13
+
+
+Customer table
+Numeric values:
+No numerical values
+
+Non-numeric values:
+SELECT 
+    MODE() WITHIN GROUP (ORDER BY create_date) AS mode_create_date,
+    MODE() WITHIN GROUP (ORDER BY store_id) AS mode_store_id
+FROM customer;
+
+Mode_create_date = 2006-02-14
+Mode_store_id = 1
