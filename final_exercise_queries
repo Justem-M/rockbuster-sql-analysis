@@ -1,0 +1,113 @@
+Content
+1. Summarised Data
+2. Top 10 Countries for Rockbuster in Terms of Customer numbers
+3. Top 10 Cities within top 10 Countries
+4. Top 5 Customers from top 10 Cities who have paid the highest total amounts
+5. Last Geographic Distribution of Customers and Revenue generated
+
+1. Summarised Data
+
+SELECT
+MIN(rental_duration) AS min_rental_duration,
+MAX(rental_duration) AS max_rental_duration,
+AVG(rental_duration) AS avg_rental_duration,
+MIN(rental_rate) AS min_rental_rate,
+MAX(rental_rate) AS max_rental_rate,
+AVG(rental_rate) AS avg_rental_rate,
+MIN(length) AS min_length,
+MAX(length) AS max_length,
+AVG(length) AS avg_length,
+MIN(replacement_cost) AS min_replacement_cost,
+MAX(replacement_cost) AS max_replacement_cost,
+AVG(replacement_cost) AS avg_replacement_cost
+FROM film;
+
+SELECT MODE() WITHIN GROUP (ORDER BY rating) AS mode_rating FROM film;
+
+
+2. Top 10 Countries for Rockbuster in Terms of Customer numbers
+
+SELECT D.country,
+COUNT(A.customer_id) AS customer_count
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+GROUP BY D.country
+ORDER BY customer_count DESC
+LIMIT 10;
+
+3. Top 10 Cities within top 10 Countries
+
+SELECT C.city,
+D.country,
+COUNT(A.customer_id) AS customer_count
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+WHERE D.country IN (
+SELECT D.country
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+GROUP BY D.country
+ORDER BY COUNT(A.customer_id) DESC
+LIMIT 10
+)
+GROUP BY C.city, D.country
+ORDER BY customer_count DESC
+LIMIT 10;
+
+
+4. Top 5 Customers from top 10 Cities who have paid the highest total amounts
+
+SELECT
+B.customer_id,
+B.first_name AS customer_first_name,
+B.last_name AS customer_last_name,
+D.city,
+E.country,
+SUM(A.amount) AS total_payment
+FROM payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_id = D.city_id
+INNER JOIN country E ON D.country_id = E.country_id
+WHERE D.city IN (
+SELECT C.city
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+WHERE D.country IN (
+SELECT D.country
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+GROUP BY D.country
+ORDER BY COUNT(A.customer_id) DESC
+LIMIT 10
+)
+GROUP BY C.city
+ORDER BY COUNT(A.customer_id) DESC
+LIMIT 10
+)
+GROUP BY B.customer_id, B.first_name, B.last_name, D.city, E.country
+ORDER BY SUM(A.amount) DESC
+LIMIT 5;
+
+
+5. Last Geographic Distribution of Customers and Revenue generated
+
+SELECT country,
+COUNT(DISTINCT A.customer_id) AS customer_count,
+SUM(amount) AS total_payment
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_ID = D.country_ID
+INNER JOIN payment E ON a.customer_id = E.customer_id
+GROUP BY country
