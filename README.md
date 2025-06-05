@@ -1,53 +1,38 @@
 # rockbuster-sql-analysis
 SQL data analysis project for Rockbuster Stealth, a fictional video rental company
 
- Rockbuster Stealth SQL Data Analysis 
+# 🎬 Rockbuster Stealth SQL Data Analysis
 
- 
+## Overview
 
-Overview 
+This SQL project was developed as part of a data analytics course and is based on a fictional company, **Rockbuster Stealth LLC** — a former global movie rental chain. Facing growing competition from streaming services like Netflix and Amazon Prime, Rockbuster plans to transition to an online video rental service.
 
-This project was developed as part of a data analytics course and is based on a fictional company, Rockbuster Stealth LLC, a former global movie rental chain. With growing competition from streaming services like Netflix and Amazon Prime, Rockbuster plans to relaunch as an online video rental service. 
+As a data analyst in Rockbuster’s Business Intelligence (BI) department, I supported the company's launch strategy by using SQL to extract business insights from their relational database.
 
-As a data analyst in the company's Business Intelligence (BI) department, I was tasked with supporting the launch strategy by using SQL to extract insights from their existing database. 
+## Objectives
 
- 
+The project aimed to:
+- Load Rockbuster’s existing data into a PostgreSQL relational database.
+- Explore customer, rental, and payment data using SQL queries.
+- Answer strategic business questions to inform the company's 2020 online launch plan.
+- Present findings through visualisation and storytelling, using Tableau and Excel.
 
-Objectives 
+## Key Business Questions Addressed
 
-The project involved: 
+- 🎥 Which movies contributed the most and least to revenue?
+- ⏱️ What is the average rental duration for all films?
+- 🌍 In which countries are Rockbuster's customers based?
+- 💸 Where are the customers with the highest lifetime value?
+- 📊 Do sales figures vary across geographic regions?
 
-Loading Rockbuster’s existing relational database into PostgreSQL. 
+## Tools Used
 
-Writing SQL queries to explore and analyse customer behaviour, revenue performance, and geographic patterns. 
+- **PostgreSQL** – for setting up and querying the relational database
+- **SQL** – for exploratory and targeted data analysis
+- **Excel** – for creating supporting visuals and compiling deliverables
+- **Tableau** – for final visual presentation of insights
 
-Answering key business questions from Rockbuster’s management to guide strategic decisions. 
+## 📈 Tableau Visualisation
 
- 
-
-Key Business Questions Addressed 
-
-Which movies contributed the most and least to revenue? 
-
-What is the average rental duration across all titles? 
-
-Where are Rockbuster’s customers located? 
-
-Which customers have the highest lifetime value? 
-
-Do sales figures differ by geographic region? 
-
- 
-
-Tools Used 
-
-PostgreSQL (for database setup and querying) 
-
-SQL (for data extraction and analysis) 
-
-Excel (for visualisation and final presentation of insights) 
-
-
-Tableau visualisation of Rockbuster geo distribution customers and revenue
-
-https://public.tableau.com/app/profile/justem.maciejek/viz/Rockbuster_geo_distribution_customers_a_revenue/Sheet1
+View the dashboard here: [Rockbuster Stealth Tableau Dashboard]([https://your-tableau-link.com](https://public.tableau.com/app/profile/justem.maciejek/viz/Rockbuster_geo_distribution_customers_a_revenue/Sheet1
+))  
